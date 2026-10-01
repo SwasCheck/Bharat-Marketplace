@@ -1,0 +1,137 @@
+// ============================================================================
+// Measures for the Bharat Marketplace Seller Analytics report
+// Create a table called "_Measures" (Home > Enter Data, one blank column, then delete the column)
+// and add each measure below to it. Tables: FactOrders, DimDate, DimSeller, DimCity, DimCategory, DimCustomer
+// ============================================================================
+
+// ---------- Date table helper (only if you do not load DimDate.csv) ----------
+// DimDate = CALENDAR(DATE(2025,1,1), DATE(2025,12,31))
+
+// ---------- Volume and value ----------
+Orders = COUNTROWS ( FactOrders )
+
+GMV = SUM ( FactOrders[OrderValue] )
+
+Delivered GMV =
+CALCULATE ( SUM ( FactOrders[OrderValue] ), FactOrders[OrderStatus] = "Delivered" )
+
+AOV = DIVIDE ( [GMV], [Orders] )
+
+Active Sellers = DISTINCTCOUNT ( FactOrders[SellerID] )
+
+Active Customers = DISTINCTCOUNT ( FactOrders[CustomerID] )
+
+Orders per Active Seller = DIVIDE ( [Orders], [Active Sellers] )
+
+// ---------- Growth ----------
+GMV Prior Month =
+CALCULATE ( [GMV], DATEADD ( DimDate[Date], -1, MONTH ) )
+
+GMV MoM % = DIVIDE ( [GMV] - [GMV Prior Month], [GMV Prior Month] )
+
+GMV YTD = TOTALYTD ( [GMV], DimDate[Date] )
+
+// ---------- Order quality ----------
+RTO Orders =
+CALCULATE ( [Orders], FactOrders[OrderStatus] = "RTO" )
+
+Cancelled Orders =
+CALCULATE ( [Orders], FactOrders[OrderStatus] = "Cancelled" )
+
+Returned Orders =
+CALCULATE ( [Orders], FactOrders[OrderStatus] = "Returned" )
+
+// Definitions used everywhere in this project (SQL, Python and Power BI):
+//   Shipped orders = all orders except Cancelled
+//   RTO % and Return % are measured on shipped orders; Cancel % on all orders.
+Shipped Orders = [Orders] - [Cancelled Orders]
+
+RTO % = DIVIDE ( [RTO Orders], [Shipped Orders] )
+
+Cancel % = DIVIDE ( [Cancelled Orders], [Orders] )
+
+Return % = DIVIDE ( [Returned Orders], [Shipped Orders] )
+
+GMV Lost to RTO =
+CALCULATE ( [GMV], FactOrders[OrderStatus] = "RTO" )
+
+COD Share % =
+DIVIDE ( CALCULATE ( [Orders], FactOrders[PaymentMode] = "COD" ), [Orders] )
+
+Avg Rating = AVERAGE ( FactOrders[Rating] )
+
+Avg Delivery Days =
+CALCULATE ( AVERAGE ( FactOrders[DeliveryDays] ), FactOrders[OrderStatus] IN { "Delivered", "Returned" } )
+
+// ---------- Logistics ----------
+Shipping Cost = SUM ( FactOrders[ShippingCost] )
+
+Shipping Cost per Order = DIVIDE ( [Shipping Cost], [Orders] )
+
+Shipping % of GMV = DIVIDE ( [Shipping Cost], [GMV] )
+
+Reverse Leg Cost =
+CALCULATE ( [Shipping Cost], FactOrders[OrderStatus] IN { "RTO", "Returned" } )
+
+Reverse Leg Share % = DIVIDE ( [Reverse Leg Cost], [Shipping Cost] )
+
+// ---------- Seller funnel (from DimSeller) ----------
+Registered Sellers = COUNTROWS ( DimSeller )
+
+Listed Sellers = CALCULATE ( COUNTROWS ( DimSeller ), DimSeller[IsListed] = 1 )
+
+Sellers With First Order = CALCULATE ( COUNTROWS ( DimSeller ), DimSeller[HasFirstOrder] = 1 )
+
+Listing Rate % = DIVIDE ( [Listed Sellers], [Registered Sellers] )
+
+First Order Rate % = DIVIDE ( [Sellers With First Order], [Listed Sellers] )
+
+Registered to First Order % = DIVIDE ( [Sellers With First Order], [Registered Sellers] )
+
+Dormant Sellers =
+CALCULATE ( COUNTROWS ( DimSeller ), DimSeller[ActivityStatus] = "Dormant" )
+
+Dormant Seller % = DIVIDE ( [Dormant Sellers], [Sellers With First Order] )
+
+// ---------- Concentration: share of GMV from the top 20% of sellers ----------
+Top 20% Seller GMV Share =
+VAR SellerTable =
+    ADDCOLUMNS ( VALUES ( FactOrders[SellerID] ), "@gmv", [Delivered GMV] )
+VAR N = COUNTROWS ( SellerTable )
+VAR TopN = ROUNDUP ( N * 0.2, 0 )
+VAR TopGMV =
+    SUMX ( TOPN ( TopN, SellerTable, [@gmv], DESC ), [@gmv] )
+VAR TotalGMV = SUMX ( SellerTable, [@gmv] )
+RETURN
+    DIVIDE ( TopGMV, TotalGMV )
+
+// ---------- Cohort retention (use with a matrix: rows = cohort month, columns = months since first order) ----------
+// Add these calculated columns first (Table view > New column):
+//
+// On DimSeller:
+//   CohortMonth =
+//       IF ( ISBLANK ( DimSeller[FirstOrderDate] ), BLANK (),
+//            DATE ( YEAR ( DimSeller[FirstOrderDate] ), MONTH ( DimSeller[FirstOrderDate] ), 1 ) )
+//
+// On FactOrders:
+//   MonthsSinceFirstOrder =
+//       VAR firstOrder = RELATED ( DimSeller[FirstOrderDate] )
+//       RETURN DATEDIFF ( DATE ( YEAR ( firstOrder ), MONTH ( firstOrder ), 1 ),
+//                         DATE ( YEAR ( FactOrders[Date] ), MONTH ( FactOrders[Date] ), 1 ), MONTH )
+//
+// Matrix: rows = DimSeller[CohortMonth], columns = FactOrders[MonthsSinceFirstOrder], values = [Retention %].
+// Filter MonthsSinceFirstOrder to 0-6 and exclude the blank cohort.
+Cohort Size =
+CALCULATE ( COUNTROWS ( DimSeller ), DimSeller[HasFirstOrder] = 1, ALLEXCEPT ( DimSeller, DimSeller[CohortMonth] ) )
+
+Retained Sellers =
+CALCULATE ( DISTINCTCOUNT ( FactOrders[SellerID] ), FactOrders[OrderStatus] <> "Cancelled" )
+
+Retention % = DIVIDE ( [Retained Sellers], [Cohort Size] )
+
+// ---------- Dynamic titles ----------
+Title RTO Card =
+"RTO " & FORMAT ( [RTO %], "0.0%" ) & " of shipped orders"
+
+Title GMV =
+"GMV Rs " & FORMAT ( [GMV] / 10000000, "0.00" ) & " crore"

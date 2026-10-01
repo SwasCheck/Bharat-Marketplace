@@ -1,0 +1,11 @@
+power_bi_measure,expected_value
+Orders,107737.0
+GMV,30713491.0
+Delivered GMV,22479604.0
+AOV,285.08
+Active Sellers,1815.0
+RTO % (x100),18.19
+Cancel % (x100),4.02
+COD Share % (x100),57.5
+Shipping Cost per Order,64.14
+Shipping % of GMV (x100),22.5

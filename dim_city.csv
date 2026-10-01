@@ -1,0 +1,33 @@
+city_id,city_name,state,tier,tier_label
+1,Mumbai,Maharashtra,1,Tier 1 (top 8)
+2,Delhi,Delhi,1,Tier 1 (top 8)
+3,Bengaluru,Karnataka,1,Tier 1 (top 8)
+4,Hyderabad,Telangana,1,Tier 1 (top 8)
+5,Chennai,Tamil Nadu,1,Tier 1 (top 8)
+6,Kolkata,West Bengal,1,Tier 1 (top 8)
+7,Pune,Maharashtra,1,Tier 1 (top 8)
+8,Ahmedabad,Gujarat,1,Tier 1 (top 8)
+9,Jaipur,Rajasthan,2,Tier 2
+10,Lucknow,Uttar Pradesh,2,Tier 2
+11,Indore,Madhya Pradesh,2,Tier 2
+12,Nagpur,Maharashtra,2,Tier 2
+13,Coimbatore,Tamil Nadu,2,Tier 2
+14,Surat,Gujarat,2,Tier 2
+15,Patna,Bihar,2,Tier 2
+16,Bhubaneswar,Odisha,2,Tier 2
+17,Ranchi,Jharkhand,2,Tier 2
+18,Vadodara,Gujarat,2,Tier 2
+19,Kochi,Kerala,2,Tier 2
+20,Chandigarh,Chandigarh,2,Tier 2
+21,Bareilly,Uttar Pradesh,3,Tier 3
+22,Gorakhpur,Uttar Pradesh,3,Tier 3
+23,Siliguri,West Bengal,3,Tier 3
+24,Jhansi,Uttar Pradesh,3,Tier 3
+25,Muzaffarpur,Bihar,3,Tier 3
+26,Dibrugarh,Assam,3,Tier 3
+27,Hisar,Haryana,3,Tier 3
+28,Karimnagar,Telangana,3,Tier 3
+29,Raichur,Karnataka,3,Tier 3
+30,Satna,Madhya Pradesh,3,Tier 3
+31,Bhilwara,Rajasthan,3,Tier 3
+32,Tirunelveli,Tamil Nadu,3,Tier 3

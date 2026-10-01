@@ -1,0 +1,32 @@
+{
+  "name": "Marketplace Plum",
+  "dataColors": ["#9F2089", "#F43397", "#1F6F8B", "#570D48", "#C2379B", "#63B6D4", "#6A4A61", "#1C7F54"],
+  "background": "#FFFFFF",
+  "foreground": "#2A0F24",
+  "tableAccent": "#9F2089",
+  "good": "#1C7F54",
+  "neutral": "#6A4A61",
+  "bad": "#B83636",
+  "maximum": "#570D48",
+  "center": "#F43397",
+  "minimum": "#F8E9F3",
+  "textClasses": {
+    "title": { "fontSize": 14, "fontFace": "Segoe UI Semibold", "color": "#570D48" },
+    "header": { "fontSize": 12, "fontFace": "Segoe UI Semibold", "color": "#570D48" },
+    "label": { "fontSize": 10, "fontFace": "Segoe UI", "color": "#6A4A61" },
+    "callout": { "fontSize": 28, "fontFace": "Segoe UI Semibold", "color": "#9F2089" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [{ "fontColor": { "solid": { "color": "#570D48" } }, "fontSize": 12 }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#EFD6E6" } }, "radius": 6 }]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#FDF6FB" } }, "transparency": 0 }]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+,odds_ratio,ci_low,ci_high,p_value
+cod,3.53,3.394,3.672,0.0
+tier2,1.406,1.311,1.509,0.0
+tier3,1.779,1.662,1.905,0.0
+slow_delivery,1.573,1.512,1.637,0.0
+high_price,1.403,1.326,1.484,0.0
+deep_discount,1.185,1.142,1.23,0.0

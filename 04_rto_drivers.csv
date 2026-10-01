@@ -1,0 +1,22 @@
+tier_label,payment_mode,delivery_band,orders,rto_orders,rto_pct,gmv_lost_to_rto,shipping_spent_on_rto,rank_by_gmv_lost
+Tier 3,COD,4-5 days,13841,3487,25.2,995957.0,364342.0,1
+Tier 3,COD,6-7 days,9909,3066,30.9,888452.0,326343.0,2
+Tier 3,COD,8+ days,6093,2100,34.5,582887.0,226107.0,3
+Tier 3,COD,1-3 days,7721,1897,24.6,540439.0,198870.0,4
+Tier 2,COD,1-3 days,7506,1529,20.4,482025.0,140910.0,5
+Tier 2,COD,4-5 days,7134,1576,22.1,478519.0,145905.0,6
+Tier 3,Prepaid,4-5 days,7362,670,9.1,199196.0,70141.0,7
+Tier 2,COD,6-7 days,2495,630,25.3,190801.0,60105.0,8
+Tier 3,Prepaid,6-7 days,5015,557,11.1,156569.0,58967.0,9
+Tier 2,Prepaid,4-5 days,6488,473,7.3,153082.0,43792.0,10
+Tier 1 (top 8),COD,1-3 days,2792,438,15.7,149063.0,37981.0,11
+Tier 2,Prepaid,1-3 days,6945,455,6.6,139528.0,42362.0,12
+Tier 3,Prepaid,8+ days,3208,404,12.6,113050.0,43389.0,13
+Tier 1 (top 8),Prepaid,1-3 days,5448,281,5.2,104552.0,24118.0,14
+Tier 3,Prepaid,1-3 days,3967,332,8.4,98756.0,34600.0,15
+Tier 2,COD,8+ days,709,226,31.9,73261.0,23215.0,16
+Tier 2,Prepaid,6-7 days,2391,232,9.7,73085.0,22487.0,17
+Tier 1 (top 8),COD,4-5 days,1108,196,17.7,66136.0,17175.0,18
+Tier 1 (top 8),Prepaid,4-5 days,2040,116,5.7,34756.0,10500.0,19
+Tier 2,Prepaid,8+ days,659,77,11.7,25600.0,7672.0,20
+Tier 1 (top 8),Prepaid,6-7 days,313,22,7.0,6558.0,1919.0,21

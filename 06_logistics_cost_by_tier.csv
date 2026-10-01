@@ -1,0 +1,13 @@
+tier_label,courier,orders,aov,ship_cost_per_order,ship_cost_pct_of_gmv,pct_cost_from_rto_and_returns
+Tier 1 (top 8),All couriers,12496,320.1,53.3,16.7,22.5
+Tier 1 (top 8),In-house network,5997,317.4,43.4,13.7,23.1
+Tier 1 (top 8),Partner courier 1,4002,323.6,58.6,18.1,22.9
+Tier 1 (top 8),Partner courier 2,2497,320.7,68.7,21.4,21.2
+Tier 2,All couriers,35740,296.2,58.9,19.9,30.5
+Tier 2,In-house network,17322,296.6,48.8,16.5,30.4
+Tier 2,Partner courier 1,11371,295.1,63.7,21.6,29.4
+Tier 2,Partner courier 2,7047,297.2,76.2,25.6,32.2
+Tier 3,All couriers,59501,271.0,69.5,25.7,38.5
+Tier 3,In-house network,28607,271.6,58.8,21.6,38.6
+Tier 3,Partner courier 1,18797,270.9,74.5,27.5,37.3
+Tier 3,Partner courier 2,12097,269.9,87.3,32.3,40.1
