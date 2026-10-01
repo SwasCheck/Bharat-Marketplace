@@ -21,13 +21,12 @@ The `.pbix` file is not committed because it is a binary built in Power BI Deskt
 Star schema, all relationships many-to-one with single-direction filtering from dimension to fact:
 
 ```
-DimDate[Date]          1 --> *  FactOrders[Date]
-DimSeller[SellerID]    1 --> *  FactOrders[SellerID]
-DimCustomer[CustomerID]1 --> *  FactOrders[CustomerID]
-DimCategory[CategoryID]1 --> *  FactOrders[CategoryID]
-DimCity[CityID]        1 --> *  FactOrders[CityID]      (delivery city)
-DimCity[CityID]        1 --> *  DimSeller[CityID]       (seller city, set inactive and use USERELATIONSHIP if needed)
-```
+DimDate[Date]           1 --> *  FactOrders[Date]
+DimSeller[SellerID]     1 --> *  FactOrders[SellerID]
+DimCustomer[CustomerID] 1 --> *  FactOrders[CustomerID]
+DimCategory[CategoryID] 1 --> *  FactOrders[CategoryID]
+DimCity[CityID]         1 --> *  FactOrders[CityID]   (delivery city)
+DimCity[CityID]         1 --> *  DimSeller[CityID]    (seller city, inactive)
 
 Mark `DimDate` as the date table (Table tools > Mark as date table > `Date`). Sort `DimDate[month_label]` by `DimDate[month_start]`.
 
